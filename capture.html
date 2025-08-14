@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jonathan Geisinger – Capture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #10141a;
+            --secondary-bg: #161b22;
+            --accent: #ffcc00;
+            --text-main: #f3f6fa;
+            --text-sub: #b3bac6;
+            --card-shadow: 0 6px 32px rgba(0,0,0,0.6);
+            --border-radius: 14px;
+            --max-width: 950px;
+            --transition: 0.3s cubic-bezier(.4,0,.2,1);
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--primary-bg);
+            color: var(--text-main);
+            font-family: 'Roboto', Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+        }
+
+        body {
+            background: linear-gradient(120deg, #10141a 60%, #1e222d 100%);
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 1rem 2rem 1rem;
+            background: linear-gradient(90deg, #161b22 80%, #212736 100%);
+            border-bottom: 2px solid #232936;
+            box-shadow: 0 1px 12px 0 rgba(0,0,0,0.25);
+        }
+        header h1 {
+            margin: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 600;
+            font-size: 2.7rem;
+            letter-spacing: 2px;
+            color: var(--accent);
+            text-shadow: 0 2px 16px #00000050;
+        }
+        header p {
+            color: var(--text-sub);
+            font-size: 1.15rem;
+            margin-top: 1rem;
+            font-family: 'Roboto', Arial, sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        main {
+            max-width: var(--max-width);
+            margin: 2rem auto 3rem auto;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            justify-content: space-between;
+        }
+
+        .portfolio {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 0;
+        }
+
+        .video-card {
+            background: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform var(--transition), box-shadow var(--transition);
+            border: 1.5px solid #22283b;
+            display: flex;
+            flex-direction: column;
+        }
+        .video-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 40px 0 #000000aa;
+            border-color: var(--accent);
+        }
+        .video-card iframe {
+            width: 100%;
+            min-height: 330px;
+            max-height: 410px;
+            border: none;
+            background: #000;
+        }
+        .video-info {
+            padding: 1.2rem 1.5rem 1.3rem 1.5rem;
+        }
+        .video-info h2 {
+            margin: 0 0 0.3rem 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 1.28rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
+        .video-info p {
+            color: var(--text-sub);
+            font-size: 1rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .info-sections-row {
+            display: flex;
+            gap: 2.5rem;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .about-me, .resume {
+            background: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            border: 1.5px solid #22283b;
+            padding: 2.2rem 2rem 2rem 2rem;
+            min-width: 340px;
+            max-width: 540px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+            flex: 1 1 47%;
+        }
+
+        .about-me h2, .resume h2 {
+            margin-top: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            border-bottom: 2px solid #232936;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.3rem;
+            letter-spacing: 1px;
+        }
+
+        .about-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.1rem;
+            margin-bottom: 0.7rem;
+        }
+        .about-item img {
+            width: 190px;
+            height: 190px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 4px 18px #00000060;
+            background: #1a1a1a;
+            flex-shrink: 0;
+            transition: width 0.25s, height 0.25s;
+        }
+        .about-item img:hover {
+            transform: scale(1.06);
+            box-shadow: 0 8px 30px #00000080;
+        }
+        .about-item .about-text {
+            flex: 1;
+        }
+        .about-item .about-title {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 1.12rem;
+            margin-bottom: 0.2rem;
+        }
+        .about-item .about-desc {
+            color: var(--text-sub);
+            font-size: 0.98rem;
+            margin: 0;
+            line-height: 1.45;
+        }
+
+        /* Coffee section header style to match About/Resume, but not full section */
+        .coffee-section-title {
+            margin-top: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 1.12rem;
+            font-weight: 600;
+            color: var(--accent);
+            /* no border-bottom */
+            padding-bottom: 0;
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .coffee-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+            margin-top: 0.6rem;
+            margin-bottom: 0.4rem;
+        }
+        .coffee-grid img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 1px 6px #00000040;
+            background: #18191c;
+        }
+        /* Center the latte art hearts for each coffee photo */
+        .coffee1 { object-position: 53% 45%; }
+        .coffee2 { object-position: 48% 42%; }
+        .coffee3 { object-position: 50% 52%; }
+        .coffee4 { object-position: 30% 47%; }
+
+        .coffee-blurb {
+            margin: 0.5rem 0 0 0;
+            font-size: 0.99rem;
+            color: var(--text-sub);
+            text-align: left;
+        }
+
+        .resume-section:not(:last-child) {
+            margin-bottom: 1.1rem;
+        }
+        .resume-section h3 {
+            margin-bottom: 0.15rem;
+            font-size: 1.12rem;
+            color: var(--accent);
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 600;
+        }
+        .resume-section h4 {
+            color: #ffedb3;
+            font-size: 1rem;
+            margin: 0.9rem 0 0.4rem 0;
+            font-weight: 600;
+            font-family: 'Montserrat', Arial, sans-serif;
+            letter-spacing: 1px;
+        }
+        .resume-section p, .resume-section li {
+            color: var(--text-sub);
+            font-size: 0.97rem;
+            margin: 0.2rem 0;
+        }
+        .resume-section strong { color: var(--text-main); }
+        .resume-section em {
+            color: #e2e2e2;
+            font-style: italic;
+            font-size: 0.96em;
+        }
+        .resume-section ul {
+            margin: 0.2rem 0 0.7rem 1.2rem;
+            padding: 0 0 0 1.1rem;
+        }
+        .resume-section ul li {
+            margin-bottom: 0.28rem;
+            line-height: 1.5;
+        }
+        .resume-section a {
+            color: var(--accent);
+            text-decoration: underline;
+            transition: color var(--transition);
+            font-weight: 500;
+        }
+        .resume-section a:hover {
+            color: #fff9c4;
+            background: #332e1a;
+        }
+        .resume-section hr {
+            border: 0;
+            border-top: 1px solid #232936;
+            margin: 1.2rem 0;
+        }
+
+        @media (max-width: 1080px) {
+            main {
+                max-width: 100vw;
+            }
+            .portfolio, .info-sections-row, .about-me, .resume {
+                max-width: 98vw;
+                min-width: unset;
+                margin: 0 auto;
+            }
+            .info-sections-row {
+                flex-direction: column;
+                gap: 2.5rem;
+            }
+        }
+        @media (max-width: 700px) {
+            .about-me, .resume {
+                padding: 1.3rem 0.8rem 1.2rem 0.8rem;
+                max-width: 97vw;
+            }
+            .video-card iframe {
+                min-height: 220px;
+                max-height: 260px;
+            }
+            .video-info { padding: 1rem 0.7rem 1rem 0.7rem; }
+            .about-item img {
+                width: 120px;
+                height: 120px;
+            }
+        }
+        @media (max-width: 500px) {
+            header h1 {
+                font-size: 1.2rem;
+                letter-spacing: 0.7px;
+            }
+            header { padding: 1.5rem 0.5rem 1.2rem 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Jonathan Geisinger – Capture</h1>
+    <p>Years of competitive gaming combined with my tech and video background have helped me create and capture gaming moments that stay in the hearts of players around the globe. </p>
+    <p>I've utilized a slew of technologies at my disposal to create lasting impressions and ensure high quality, high competence capture for any game.</p>
+    <p>Dev Kit Capture Tools ✅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In-Engine Cinematic Tools/Sequencers ✅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High-End Hardware Capture ✅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replay Systems and in-game capture tools ✅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Live, high quality competitive game capture ✅</p>
+</header>
+
+<main>
+    <section class="portfolio">
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/1ksAAY8r-cI" title="PUBG Mobile Roadshow" allowfullscreen></iframe>
+            <div class="video-info">
+                <h2>PUBG Mobile Roadshow</h2>
+                <p>Provided production support and facilitated live game capture for a large-scale roadshow campaign.</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/Q1vliwIF_14" title="Muscle Chicken Series" allowfullscreen></iframe>
+            <div class="video-info">
+                <h2>Muscle Chicken Series</h2>
+                <p>Served as Creative Producer and contributed to storyboarding gameplay moments a comedic branded content series.</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/ulO38SyZ4V0" title="League of Legends" allowfullscreen></iframe>
+            <div class="video-info">
+                <h2>League of Legends</h2>
+                <p>Managed game capture, editing, and full production for an esports-focused campaign piece.</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/qDHdTWkdoeE" title="Honor of Kings" allowfullscreen></iframe>
+            <div class="video-info">
+                <h2>Honor of Kings</h2>
+                <p>Provided high level competitive game capture and produced promotional materials and coordinated localization to reach global audiences.</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/qpSiAiZyIn0" title="Path of Exile 2" allowfullscreen></iframe>
+            <div class="video-info">
+                <h2>Path of Exile 2</h2>
+                <p>Directed capture, editing, and custom 3D graphics while overseeing localization for a worldwide reveal.</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/6vO9vY4nE3A" title="Nikke" allowfullscreen></iframe>
+            <div class="video-info">
+                <h2>Nikke</h2>
+                <p>Served as Technical Director and Project Producer for a high-profile livestream series.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="info-sections-row">
+        <section class="about-me">
+            <h2>About Me</h2>
+            <div class="about-item">
+                <img src="images/lagunawide.jpg" alt="Race car at Laguna Seca">
+                <div class="about-text">
+                    <div class="about-title">Amateur Race Car Driver</div>
+                    <div class="about-desc">Find me at the tracks around SoCal competing in the 86 Cup or HPDE lapping days.</div>
+                </div>
+            </div>
+            <div class="about-item">
+                <img src="images/melee screenshot.png" alt="Super Smash Bros. Melee tournament screenshot">
+                <div class="about-text">
+                    <div class="about-title">Former Competitive Smash Bros. Player</div>
+                    <div class="about-desc">Power ranked in SoCal and other regions—my love of competitive gaming knows no bounds.</div>
+                </div>
+            </div>
+            <div class="about-item">
+                <img src="images/salute jg.jpg" alt="Salute in front of Jonathan's Coffee & Restaurant in Japan">
+                <div class="about-text">
+                    <div class="about-title">Japan Traveler</div>
+                    <div class="about-desc">My partner is Japanese and I am studying the language! I hope to continue utilizing my affinity for Japanese culture.</div>
+                </div>
+            </div>
+            <div>
+                <div class="coffee-section-title">Coffee</div>
+                <div class="coffee-grid">
+                    <img src="images/coffee1.jpg" alt="Latte art and affogato at 'here' cafe" class="coffee1">
+                    <img src="images/coffee2.jpg" alt="Two lattes with latte art and cheesecake" class="coffee2">
+                    <img src="images/coffee3.jpg" alt="Latte art at 'butter' cafe with canelé" class="coffee3">
+                    <img src="images/coffee4.jpg" alt="Latte art in black cup on marble table" class="coffee4">
+                </div>
+                <div class="coffee-blurb">
+                    Avid coffee consumer and espresso enjoyer. Amateur brewer and enjoy coffee in all forms!
+                </div>
+            </div>
+        </section>
+
+        <section class="resume">
+            <h2>Resume</h2>
+            <div class="resume-section">
+                <h3>Jonathan Geisinger</h3>
+                <p><strong>Associate Producer | Creative Project Manager</strong></p>
+                <p>Los Angeles, CA | jonathan.geisinger@gmail.com | 347-804-1133 | 
+                    <a href="https://www.linkedin.com/in/jonathan-geisinger-venti/" target="_blank" rel="noopener">LinkedIn Profile</a>
+                </p>
+                <p>
+                    Associate Producer leading game capture teams, and localized marketing content with experience in game production. Adept at coordinating cross-functional teams for global game publishers and agencies, with a proven track record supporting major titles such as PUBG: MOBILE and Path of Exile 2. Strong background in event production, esports, and community-driven programming across PC and console platforms.
+                </p>
+            </div>
+            <div class="resume-section">
+                <h3>Summary of Qualifications</h3>
+                <ul>
+                    <li><strong>Game Capture Expertise:</strong> Led capture teams and provided full producer support for Tencent AAA mobile and PC titles including PUBG: MOBILE, Honor of Kings, and Path of Exile 2. Experienced in variety capture environments.</li>
+                    <li><strong>Cross-Functional Collaboration:</strong> Managed internal and external stakeholders, including localization teams, editors, and brand managers to deliver polished video and social content on tight timelines.</li>
+                    <li><strong>Marketing & Content Strategy:</strong> Developed localized content for the North American market and supported social media initiatives across various platforms.</li>
+                    <li><strong>Esports & Tournament Operations:</strong> Coordinated remote and live tournaments for major esports titles such as Call of Duty, Overwatch, and Halo MCC.</li>
+                </ul>
+            </div>
+            <div class="resume-section">
+                <h3>Experience</h3>
+                <p><strong>ZAM (Tencent)</strong> – Playa Vista, CA <em>October 2021 – June 2025</em></p>
+                <p><strong>Associate Producer / Lead Game Capture</strong> <em>(Oct 2022 – June 2025)</em></p>
+                <ul>
+                    <li>Oversee internal team of capture specialists and editors for agency-supported Tencent titles across multiple platforms.</li>
+                    <li>Supported campaign development for top titles: Path of Exile 2, PUBG: MOBILE, and GODDESS OF VICTORY: NIKKE.</li>
+                    <li>Created culturally relevant content tailored to North American, Western European audiences.</li>
+                    <li>Managed a team of gameplay capture specialists and editors to deliver assets for partner studios.</li>
+                    <li>Spearheaded and built capture repositories and file sharing systems between capture specialists and editors using apps such as lucidlink, jumpdesktop, parsec, and more.</li>
+                </ul>
+                <p><strong>Production Assistant</strong> <em>(Oct 2021 – Oct 2022)</em></p>
+                <ul>
+                    <li>Provided production support and client communication across NA/EU/China time zones; primary liaison for editors and stakeholders.</li>
+                    <li>Head game capture specialist for all client games.</li>
+                </ul>
+                <h4>Some super cool projects I’ve worked on:</h4>
+                <p><strong>PUBG MOBILE</strong></p>
+                <ul>
+                    <li>Led all internal capture and  video creative direction for four years; conceptualized and produced social content, memes, giveaways, monetization promos, and brand collaborations. (TikTok, YouTube, X, Instagram, Facebook)</li>
+                    <li>Set capture standards and ensured specialist provided gameplay matched the expectations on a per project basis.</li>
+                    <li>Managed creative for co-branded content (e.g., Dodge, Butterfinger, Dragon Ball Super) adhering to Krafton and sponsor guidelines.</li>
+                    <li>Supported influencer live streams, esports-style broadcasts, roadshows, and VIP event filming.</li>
+                </ul>
+                 <p><strong>NIKKE</strong></p>
+                <ul>
+                    <li>Technical Director for all major live streams to date (anniversaries, holidays); managed remote OBS streams via Restream.io across YouTube and Twitter.</li>
+                    <li>Coordinated technical rehearsals, live execution, post-mortems, and viewership analytics.</li>
+                </ul>
+                <p><strong>Path of Exile 2 (PoE2)</strong></p>
+                <ul>
+                    <li>Lead capture specialist and producer for agency marketing content; led social content for Western EU community channels.</li>
+                    <li>Localized content into French and German; collaborated with contractors on guide content.</li>
+                </ul>
+                <p><strong>LPL (League of Legends Pro League - NA Content)</strong></p>
+                <ul>
+                    <li>Produced and edited daily highlight videos for LPL English Twitter; launched and grew LPL TikTok and YouTube Shorts presence.</li>
+                    <li>Produced translations of mic checks and interviews; created NA-specific replays using dev tools.</li>
+                    <li>Captured, edited bespoke content for socials, live streams using both internal debug capture and external capture tools.</li>
+                </ul>
+                <hr>
+                <p><strong>Community Gaming</strong> – Remote <em>February 2021 – October 2021</em></p>
+                <ul>
+                    <li>Served as remote tournament admin for Call of Duty and Overwatch competitions.</li>
+                    <li>Ensured seamless tournament operations and rule enforcement in virtual environments.</li>
+                    <li>Supported event continuity and player engagement during pandemic restrictions.</li>
+                </ul>
+                <p><strong>DreamHack AB</strong> – Anaheim, CA <em>February 2020</em></p>
+                <ul>
+                    <li>Oversaw bracket management and player coordination for live esports tournaments.</li>
+                    <li>Delivered high-quality player experience through real-time decision-making and escalation handling.</li>
+                </ul>
+                <p><strong>Stony Brook Smash Bros.</strong> – Stony Brook, NY <em>May 2014 – January 2018</em></p>
+                <ul>
+                    <li>Built and led collegiate Smash Bros. team to a Collegiate Starleague championship in 2016.</li>
+                    <li>Organized and executed campus-wide esports events and community tournaments.</li>
+                    <li>Competed for over a decade with notable wins (e.g., C9 Mango, multiple Top 100 players); featured at Genesis official livestream.</li>
+                </ul>
+            </div>
+            <div class="resume-section">
+                <h3>Education & Certifications</h3>
+                <ul>
+                    <li>UC Irvine - Certificate Course, Esports Project Management</li>
+                    <li>Stony Brook University - Information Systems, Writing, Japanese Studies</li>
+                    <li>Professional Scrum Master I (PSM1) - Scrum.org</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</main>
+
+</body>
+</html>
