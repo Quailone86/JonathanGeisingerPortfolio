@@ -53,6 +53,77 @@ a { color: inherit; text-decoration: none; }
   mix-blend-mode: overlay;
 }
 
+/* Full-screen ambient background: static dot-grid + slow-drifting glow orbs.
+   Both use transform/steady opacity only — no flashing, no flicker. */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(242, 238, 230, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
+}
+
+.bg-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-glow::before,
+.bg-glow::after {
+  content: "";
+  position: absolute;
+  width: 58vmax;
+  height: 58vmax;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.16;
+  will-change: transform;
+}
+
+.bg-glow::before {
+  background: var(--coral);
+  top: -22%;
+  left: -14%;
+  animation: drift-a 46s ease-in-out infinite alternate;
+}
+
+.bg-glow::after {
+  background: var(--mint);
+  bottom: -26%;
+  right: -16%;
+  animation: drift-b 54s ease-in-out infinite alternate;
+}
+
+@keyframes drift-a {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(8vw, 6vh) scale(1.08); }
+}
+
+@keyframes drift-b {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-7vw, -5vh) scale(1.06); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-glow::before,
+  .bg-glow::after {
+    animation: none;
+  }
+}
+
+.nav,
+main,
+.footer {
+  position: relative;
+  z-index: 1;
+}
+
 :focus-visible {
   outline: 2px solid var(--mint);
   outline-offset: 3px;
@@ -189,12 +260,6 @@ a { color: inherit; text-decoration: none; }
   border-radius: 50%;
   background: var(--mint);
   box-shadow: 0 0 10px var(--mint);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
 }
 
 .hero__name {
@@ -203,11 +268,22 @@ a { color: inherit; text-decoration: none; }
   font-size: clamp(3rem, 9vw, 6.5rem);
   line-height: 0.98;
   letter-spacing: -0.02em;
-  background: linear-gradient(110deg, var(--text) 40%, var(--amber) 70%, var(--coral) 100%);
+  background: linear-gradient(110deg, var(--text) 30%, var(--amber) 55%, var(--coral) 80%, var(--text) 100%);
+  background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   margin-bottom: 24px;
+  animation: shimmer 10s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__name { animation: none; }
 }
 
 .hero__role {
@@ -235,12 +311,11 @@ a { color: inherit; text-decoration: none; }
 }
 
 .hero__scroll svg {
-  animation: bob 1.6s ease-in-out infinite;
+  transition: transform 0.2s ease;
 }
 
-@keyframes bob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(5px); }
+.hero__scroll:hover svg {
+  transform: translateY(3px);
 }
 
 /* ============================================
@@ -259,6 +334,22 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   padding: 56px 0;
   border-top: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(36px) scale(0.97);
+  transition: opacity 0.8s cubic-bezier(.16,1,.3,1), transform 0.8s cubic-bezier(.16,1,.3,1);
+}
+
+.project--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 .project--reverse .project__media { order: 2; }
@@ -278,6 +369,13 @@ a { color: inherit; text-decoration: none; }
   background: var(--surface);
   border: 1px solid var(--border);
   cursor: pointer;
+  transition: transform 0.35s cubic-bezier(.16,1,.3,1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.video-embed:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.55);
+  border-color: rgba(94, 234, 212, 0.35);
 }
 
 .video-embed iframe {
