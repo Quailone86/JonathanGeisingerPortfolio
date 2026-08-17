@@ -24,14 +24,14 @@ document.querySelectorAll('.video-embed').forEach((el) => {
   }, { once: true });
 });
 
-// Reveal-on-scroll for project rows — CSS handles the actual motion (see .project / .project--visible)
+// Reveal-on-scroll for project rows and hobby photo tiles — CSS handles the actual motion
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      entry.target.classList.add('project--visible');
+      entry.target.classList.add('is-visible');
       observer.unobserve(entry.target);
     }
   });
 }, { threshold: 0.15 });
 
-document.querySelectorAll('.project').forEach((el) => observer.observe(el));
+document.querySelectorAll('.project, .hobby-tile').forEach((el) => observer.observe(el));
