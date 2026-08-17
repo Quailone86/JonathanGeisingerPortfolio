@@ -368,42 +368,48 @@ a { color: inherit; text-decoration: none; }
   max-width: 46ch;
 }
 
-/* HUD meter — signature element */
-.hud {
+/* Stat writeup — replaces the old progress-bar HUD */
+.stat-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   margin-bottom: 26px;
-  padding: 18px;
+  padding: 16px 18px;
   border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--surface);
+  list-style: none;
 }
 
-.hud__row {
-  display: grid;
-  grid-template-columns: 118px 1fr auto;
-  align-items: center;
-  gap: 12px;
+.stat-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
 }
 
-.hud__label { color: var(--text-faint); }
-
-.hud__meter {
-  height: 6px;
-  border-radius: 4px;
-  background: var(--surface-2);
-  overflow: hidden;
+.stat-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
-.hud__fill {
-  height: 100%;
-  width: var(--fill);
-  border-radius: 4px;
-  background: linear-gradient(90deg, var(--mint), var(--amber));
+.stat-list__value {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
 }
 
-.hud__value { color: var(--text); white-space: nowrap; }
+.stat-list__label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
 
 .project__tags {
   display: flex;
@@ -497,11 +503,10 @@ a { color: inherit; text-decoration: none; }
   .about__grid {
     grid-template-columns: 1fr;
   }
-  .hud__row {
-    grid-template-columns: 1fr;
-    gap: 6px;
+  .stat-list li {
+    flex-direction: column;
+    gap: 4px;
   }
-  .hud__value { white-space: normal; }
 }
 
 @media (max-width: 560px) {
