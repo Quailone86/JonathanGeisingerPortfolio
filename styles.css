@@ -247,11 +247,22 @@ main,
   margin: 0 auto;
 }
 
+.hero__badges {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
 .hero__status {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 28px;
+}
+
+.hero__notice {
+  color: var(--text-faint);
 }
 
 .dot {
@@ -513,6 +524,36 @@ main,
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+/* ============================================
+   TOOLS & CERTIFICATES
+   ============================================ */
+.tools {
+  padding: 80px var(--edge);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+}
+
+.tools__group {
+  margin-bottom: 28px;
+}
+
+.tools__group:last-child {
+  margin-bottom: 0;
+}
+
+.tools__label {
+  color: var(--mint);
+  margin-bottom: 12px;
+}
+
+.tools__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
 }
 
 /* ============================================
