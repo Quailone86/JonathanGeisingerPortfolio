@@ -645,6 +645,37 @@ main,
   transform: scale(1.03);
 }
 
+.logo-card__img {
+  max-width: 70%;
+  max-height: 60%;
+  object-fit: contain;
+  filter: grayscale(1) opacity(0.75);
+  transition: filter 0.25s ease, transform 0.25s ease;
+}
+
+.logo-card:hover .logo-card__img {
+  filter: grayscale(0) opacity(1);
+  transform: scale(1.03);
+}
+
+/* A few marks read heavier/lighter than their neighbors at the shared
+   70%/60% cap — nudge individual logos so the row's visual weight is even. */
+.logo-card__img[alt="Xbox logo"],
+.logo-card__img[alt="PUBG Mobile logo"] {
+  max-width: 46%;
+  max-height: 46%;
+}
+
+.logo-card__img[alt="Tencent logo"],
+.logo-card__img[alt="Trovo logo"],
+.logo-card__img[alt="Singularity 6 logo"] {
+  max-width: 62%;
+}
+
+.logo-card__img[alt="Shift Up logo"] {
+  max-width: 78%;
+}
+
 /* ============================================
    ABOUT
    ============================================ */
