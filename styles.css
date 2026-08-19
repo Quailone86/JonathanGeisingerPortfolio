@@ -520,6 +520,15 @@ main,
   white-space: nowrap;
 }
 
+.stat-list__value[href] {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.stat-list__value[href]:hover {
+  color: var(--mint);
+}
+
 .project__tags {
   display: flex;
   flex-wrap: wrap;
