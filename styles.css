@@ -895,6 +895,22 @@ main,
   transform: scale(1.05);
 }
 
+/* Portrait source crops in from the top by default — bias the crop upward
+   so the head isn't cut off. */
+#hobby-img-cafe {
+  object-position: center 15%;
+}
+
+/* Source photo is already a perfect square, so object-position can't shift
+   it — scale in slightly and translate instead to recenter the car. */
+#hobby-img-racing {
+  transform: scale(1.12) translateX(3%);
+}
+
+.hobby-tile:hover #hobby-img-racing {
+  transform: scale(1.12) translateX(3%) scale(1.05);
+}
+
 .hobby-tile figcaption {
   padding: 16px 18px 18px;
 }
