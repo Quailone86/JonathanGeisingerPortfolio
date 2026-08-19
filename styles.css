@@ -140,21 +140,46 @@ main,
   color: var(--text-dim);
 }
 
+/* Section identity (e.g. "Creative Production") is now the dominant heading, styled
+   like .project__title/.project__role but bigger — these are master sections, project
+   cards are one level down. The old section-title tagline (e.g. "Shipped & live")
+   demotes to a caption below it, tab-aligned with the heading text (not the index number). */
+.section-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 56px;
+}
+
+.section-head__text {
+  display: flex;
+  flex-direction: column;
+}
+
 .section-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--mint);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  letter-spacing: -0.01em;
+  color: var(--text);
   margin-bottom: 10px;
 }
 
+.section-eyebrow__index {
+  flex-shrink: 0;
+  margin-top: clamp(0.7rem, 1.8vw, 1.1rem);
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+}
+
 .section-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  margin-bottom: 56px;
-  letter-spacing: -0.01em;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--mint);
+  margin-bottom: 0;
 }
 
 .chip {
@@ -341,9 +366,9 @@ main,
 .project {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
-  gap: 56px;
+  gap: 40px;
   align-items: center;
-  padding: 56px 0;
+  padding: 36px 0;
   border-top: 1px solid var(--border);
   opacity: 0;
   transform: translateY(36px) scale(0.97);
@@ -355,12 +380,24 @@ main,
   transform: translateY(0) scale(1);
 }
 
+.project--wide-media {
+  grid-template-columns: 1.5fr 1fr;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .project {
     opacity: 1;
     transform: none;
     transition: none;
   }
+}
+
+/* Game Capture marks a real shift, business/marketing into creative & technical
+   work, so it gets a stronger break than the other section dividers. */
+#capture {
+  padding-top: 130px;
+  margin-top: 30px;
+  border-top: 2px solid rgba(94, 234, 212, 0.45);
 }
 
 .project--reverse .project__media { order: 2; }
@@ -455,25 +492,26 @@ main,
 
 .video-embed:hover .video-embed__play span { transform: scale(1.08); }
 
-.project__eyebrow { margin-bottom: 12px; }
+.project__eyebrow { margin-bottom: 8px; }
 
 .project__title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.6rem, 3vw, 2.1rem);
-  margin-bottom: 6px;
+  font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+  margin-bottom: 4px;
 }
 
 .project__role {
   color: var(--coral);
   font-family: var(--font-mono);
-  font-size: 0.85rem;
-  margin-bottom: 18px;
+  font-size: 0.78rem;
+  margin-bottom: 12px;
 }
 
 .project__desc {
   color: var(--text-dim);
-  margin-bottom: 26px;
+  font-size: 0.92rem;
+  margin-bottom: 18px;
   max-width: 46ch;
 }
 
@@ -481,9 +519,9 @@ main,
 .stat-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 26px;
-  padding: 16px 18px;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 12px 14px;
   border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--surface);
@@ -496,7 +534,7 @@ main,
   justify-content: space-between;
   gap: 16px;
   border-bottom: 1px solid var(--border);
-  padding-bottom: 10px;
+  padding-bottom: 8px;
 }
 
 .stat-list li:last-child {
@@ -505,19 +543,21 @@ main,
 }
 
 .stat-list__value {
+  flex: 1 1 55%;
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   color: var(--text);
 }
 
 .stat-list__label {
+  flex: 1 1 40%;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.66rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-faint);
-  white-space: nowrap;
+  text-align: right;
 }
 
 .stat-list__value[href] {
@@ -536,43 +576,139 @@ main,
 }
 
 /* ============================================
+   PILLAR SECTIONS (Business & Leadership / Social & Marketing)
+   ============================================ */
+.pillar {
+  padding-top: 90px;
+  margin-top: 20px;
+  border-top: 2px solid rgba(94, 234, 212, 0.35);
+}
+
+/* Static (non-video) media in a project row — same frame/hover language as .video-embed */
+.image-embed {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: transform 0.35s cubic-bezier(.16,1,.3,1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.image-embed:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.55);
+  border-color: rgba(94, 234, 212, 0.35);
+}
+
+.image-embed img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Gleam giveaway screenshot is a wide banner (~3.4:1) — give it a wider,
+   shorter frame and let it sit fully in view instead of cropping it. */
+.image-embed--wide {
+  aspect-ratio: 1080 / 318;
+}
+
+.image-embed--wide img {
+  object-fit: contain;
+}
+
+/* Tool-stack logo showcase — full-color marks, no captions, sized to read at a glance */
+.logo-showcase {
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  background: #F5F3EF;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 32px;
+  transition: transform 0.35s cubic-bezier(.16,1,.3,1), box-shadow 0.35s ease;
+}
+
+.logo-showcase:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.55);
+}
+
+.logo-showcase img {
+  max-height: 52px;
+  max-width: 130px;
+  object-fit: contain;
+}
+
+/* A tidy 2x2 square grid instead of a wrapped row — used where one mark (e.g. Unreal
+   Engine's tall badge-shaped logo) needs to run bigger than its neighbors and still
+   sit balanced and centered rather than throwing off a single-row layout. */
+.logo-showcase--grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+.logo-showcase img.logo-showcase__img--lg {
+  max-height: 84px;
+  max-width: 160px;
+}
+
+/* Round certification badges need more room to read (they carry their own text) and
+   there are only ever a few of them, so this variant drops the wide aspect-ratio. */
+.logo-showcase--badges {
+  aspect-ratio: auto;
+  padding: 28px;
+  gap: 28px;
+}
+
+.logo-showcase--badges img {
+  max-height: 110px;
+  max-width: 110px;
+}
+
+/* Stack two media tiles in one project row, e.g. tool logos + brand-collab logos */
+.project__media--stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.logo-showcase--compact {
+  aspect-ratio: auto;
+  gap: 24px;
+  padding: 22px;
+}
+
+.logo-showcase--compact img {
+  max-height: 34px;
+  max-width: 96px;
+}
+
+/* ============================================
    TOOLS & CERTIFICATES
    ============================================ */
 .tools {
-  padding: 80px var(--edge);
+  padding: 90px var(--edge) 80px;
   max-width: var(--max-width);
-  margin: 0 auto;
-  border-top: 1px solid var(--border);
-}
-
-.tools__group {
-  margin-bottom: 28px;
-}
-
-.tools__group:last-child {
-  margin-bottom: 0;
-}
-
-.tools__label {
-  color: var(--mint);
-  margin-bottom: 12px;
-}
-
-.tools__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  list-style: none;
+  margin: 20px auto 0;
+  border-top: 2px solid rgba(94, 234, 212, 0.35);
 }
 
 /* ============================================
    CLIENTS / PITCH SUPPORT
    ============================================ */
 .clients {
-  padding: 80px var(--edge);
+  padding: 90px var(--edge) 80px;
   max-width: var(--max-width);
-  margin: 0 auto;
-  border-top: 1px solid var(--border);
+  margin: 20px auto 0;
+  border-top: 2px solid rgba(94, 234, 212, 0.35);
 }
 
 .clients__body {
@@ -680,10 +816,10 @@ main,
    ABOUT
    ============================================ */
 .about {
-  padding: 100px var(--edge);
+  padding: 110px var(--edge) 100px;
   max-width: var(--max-width);
-  margin: 0 auto;
-  border-top: 1px solid var(--border);
+  margin: 20px auto 0;
+  border-top: 2px solid rgba(94, 234, 212, 0.35);
 }
 
 .about__grid {
@@ -780,10 +916,10 @@ main,
    CONTACT
    ============================================ */
 .contact {
-  padding: 100px var(--edge) 140px;
+  padding: 110px var(--edge) 140px;
   max-width: var(--max-width);
-  margin: 0 auto;
-  border-top: 1px solid var(--border);
+  margin: 20px auto 0;
+  border-top: 2px solid rgba(94, 234, 212, 0.35);
 }
 
 .contact__sub {
@@ -835,6 +971,9 @@ main,
   .stat-list li {
     flex-direction: column;
     gap: 4px;
+  }
+  .stat-list__label {
+    text-align: left;
   }
 }
 
