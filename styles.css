@@ -562,11 +562,23 @@ main,
 
 .stat-list__value[href] {
   cursor: pointer;
-  transition: color 0.2s ease;
+  text-decoration: underline;
+  text-decoration-color: rgba(242, 238, 230, 0.35);
+  text-underline-offset: 3px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.stat-list__value[href]::after {
+  content: "\2197";
+  display: inline-block;
+  margin-left: 4px;
+  color: var(--mint);
+  text-decoration: none;
 }
 
 .stat-list__value[href]:hover {
   color: var(--mint);
+  text-decoration-color: var(--mint);
 }
 
 .project__tags {
