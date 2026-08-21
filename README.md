@@ -1,40 +1,39 @@
-# Jonathan Geisinger — Portfolio
+# jonathangeisinger.com
 
-A static, single-page portfolio. No build tools needed — just HTML, CSS, and JS.
+Portfolio site code. Just HTML/CSS/JS, no frameworks, no build step. Open index.html in browser, done.
 
-## What to fill in
+Live at https://www.jonathangeisinger.com - GitHub Pages + custom domain (CNAME file, don't delete).
 
-1. **YouTube videos** — open `index.html`, search for `data-video-id=""`. For each
-   project block, paste just the video ID (the part after `v=` in a YouTube URL,
-   e.g. for `youtube.com/watch?v=dQw4w9WgXcQ` the ID is `dQw4w9WgXcQ`) between the
-   quotes. Leave it blank to keep showing the "ADD VIDEO" placeholder.
+## Files
 
-2. **Email + LinkedIn** — search for `youremail@example.com` and
-   `linkedin.com/in/your-profile` in `index.html` (in the Contact section near the
-   bottom) and swap in your real ones.
+- index.html - whole site, one page. Order: hero, projects, leadership, social, capture, clients, tools, about, contact
+- styles.css - colors/layout/everything visual
+- script.js - youtube click-to-load, scroll animations
+- assets/ - logos, hobby photo scripts, sweepstakes img
 
-3. **Projects 4 & 5** — these are placeholder slots. Fill in the title, role,
-   description, and tags, or delete the whole `<article class="project ...">`
-   block if you don't need them yet.
+## Adding a project
 
-## Preview it locally
+Copy an existing `<article class="project">` block, edit text. Add project--reverse class to flip sides so it's not repetitive.
 
-Just double-click `index.html` to open it in a browser. No server required.
+Video ID = the part after watch?v= in youtube link. Goes in data-video-id.
 
-## Publish with GitHub Pages
+## Random notes
 
-1. Create a new repo (or clear out your existing portfolio repo) and add these
-   three files: `index.html`, `styles.css`, `script.js`.
-2. Push them to the `main` branch.
-3. In the repo, go to **Settings → Pages**.
-4. Under "Build and deployment," set **Source** to "Deploy from a branch," branch
-   `main`, folder `/ (root)`. Save.
-5. GitHub gives you a URL like `https://yourusername.github.io/repo-name/` —
-   that's your live site. It can take a minute or two to go live the first time.
+- CSS/JS not updating live = caching. Bump the ?v=2 number in index.html
+- hamburger nav = small screens + wide monitors only, normal screens get full nav
+- some logos png not svg (dragon ball super, level infinite, lightspeed, level8, shiftup, typhur) - no clean transparent version
+- email/linkedin hardcoded in 2 spots - contact section + footer. update both
+- favicon = made myself, not generic
 
-## Structure
+## Run locally
 
-- `index.html` — all content and page structure
-- `styles.css` — all visual styling (dark theme, layout, responsive rules)
-- `script.js` — lazy-loads YouTube embeds on click, and a scroll-in animation
-  for project rows
+Double click index.html. no npm no server nothing
+
+## Publish
+
+Push to main, pages auto updates in a minute or two. settings already point at main/root
+
+## To do
+
+- stat rows for project 4 + 5 (poe2, lpl) - other 3 have them, never finished these
+- logo row near bottom - maybe lazy load, kinda long
