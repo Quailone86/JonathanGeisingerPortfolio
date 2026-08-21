@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#120F1D"/>
+  <rect x="1" y="1" width="62" height="62" rx="13" fill="none" stroke="#33294F" stroke-width="2"/>
+  <text x="32" y="34" text-anchor="middle" dominant-baseline="central"
+        font-family="'Space Grotesk', Arial, Helvetica, sans-serif"
+        font-weight="700" font-size="30" letter-spacing="-0.5"
+        fill="#F2EEE6">JG</text>
+</svg>
