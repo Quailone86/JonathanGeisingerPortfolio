@@ -35,3 +35,24 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 
 document.querySelectorAll('.project, .hobby-tile').forEach((el) => observer.observe(el));
+
+// Mobile nav: toggle the collapsed link dropdown open/closed, and close it
+// again once a link is picked so it doesn't stay open after navigating.
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+
+if (navToggle && navLinks) {
+  const setOpen = (open) => {
+    navLinks.classList.toggle('nav__links--open', open);
+    navToggle.classList.toggle('nav__toggle--active', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+  };
+
+  navToggle.addEventListener('click', () => {
+    setOpen(!navLinks.classList.contains('nav__links--open'));
+  });
+
+  navLinks.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setOpen(false));
+  });
+}
