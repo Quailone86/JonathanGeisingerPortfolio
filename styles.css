@@ -403,8 +403,6 @@ main,
 .project--reverse .project__media { order: 2; }
 .project--reverse .project__info { order: 1; }
 
-.project--placeholder { opacity: 0.7; }
-
 .project__media {
   position: relative;
 }
@@ -953,8 +951,6 @@ main,
   gap: 16px;
   margin-bottom: 20px;
 }
-
-.contact__note { color: var(--text-faint); }
 
 /* ============================================
    FOOTER
